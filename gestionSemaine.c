@@ -8,11 +8,10 @@
 
 
 semaine_t * SemaineFromLigne(char * ligne, semaine_t ** p_agenda) {
-    int a_s;
-    char aux[6];
+    int a_s = 0;
+    char aux[6] = "";
     strncpy(aux, ligne, 6);
     sscanf(aux, "%d", &a_s); //a_s contient le nombre composé des 6 premiers chiffres du string "ligne"
-
     semaine_t ** sem = chercherSemaine(a_s, *p_agenda);
     semaine_t * res = NULL;
     

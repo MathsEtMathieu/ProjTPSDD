@@ -12,15 +12,9 @@ int main(int argc, char * argv[]) {
     }
     else printf("Pas de nom de fichier donné\n");
 
-
-    if (agenda == NULL) {
-        printf("Pas OK Agenda\n");
-    }
-    else printf("OK %d\n", agenda->annee_semaine);
-
     afficherSemaine(agenda);
 
-    libererAgenda(agenda);
+    libererAgenda(&agenda);
 
     return(0);
 }

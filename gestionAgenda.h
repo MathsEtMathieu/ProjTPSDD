@@ -3,7 +3,7 @@
 
 semaine_t * AgendaFromFile (char *);
 
-void libererAgenda (semaine_t *);
+void libererAgenda (semaine_t **);
 
 date_t ** ListeJoursMotif(semaine_t *, char *);
 

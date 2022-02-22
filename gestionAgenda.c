@@ -6,26 +6,25 @@
 #include <stdlib.h>
 
 semaine_t * AgendaFromFile(char * nom) {
-    char ligne[11];
+    char * ligne = malloc(100 * sizeof(char));
     FILE * file = fopen(nom, "r");
     semaine_t * agenda = NULL;
 
-    if (file) {
+    if (file != NULL) {
         while (feof(file)==0) {
-            fgets(ligne, 19, file);
-            printf("%s\n", ligne);
-            gestionAction(SemaineFromLigne(ligne, &agenda), ligne);
+            if (fgets(ligne, 50, file) != NULL) gestionAction(SemaineFromLigne(ligne, &agenda), ligne);
         }
     }
+    fclose(file);
+    free(ligne);
     return(agenda);
 }
 
-void libererAgenda(semaine_t * agenda) {
-    semaine_t * cour = NULL;
+void libererAgenda(semaine_t ** p_agenda) {
+    semaine_t * cour = *p_agenda;
     semaine_t * temp = NULL;
 
-    if (agenda) {
-        cour = agenda;
+    if (cour != NULL) {
 
         while (cour) {
             temp = cour;
@@ -33,7 +32,7 @@ void libererAgenda(semaine_t * agenda) {
             libererListeActions(temp->actions);
             free(temp);
         }
-        agenda = NULL;
+        *p_agenda = NULL;
     }
 }
 
